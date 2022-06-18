@@ -1,7 +1,7 @@
 {
-  "name": "node-express-mongodb",
+  "name": "thot-server",
   "version": "1.0.0",
-  "description": "Node.js Restful CRUD API with Node.js, Express and MongoDB",
+  "description": "Thot - Node.js Restful CRUD API with Node.js, Express and MongoDB",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -13,7 +13,7 @@
     "api",
     "mongodb"
   ],
-  "author": "bezkoder",
+  "author": "angel",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.0",
