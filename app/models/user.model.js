@@ -1,9 +1,15 @@
 module.exports = mongoose => {
   var schema = mongoose.Schema(
     {
-      title: String,
-      description: String,
-      published: Boolean
+      email: String,
+      name: String,
+      surname: String,
+      password:  String,
+      company: {cif: String, name:String, active: Boolean},
+      tests: [{title: String, qualification: Number, 
+        attemps: {count:Number, attemp: [{test_date: Date, qualification: Number}]}, 
+        pass: Boolean, certificate: Boolean, last_date: Date}],
+      active: Boolean
     },
     { timestamps: true }
   );

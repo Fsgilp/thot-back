@@ -1,19 +1,19 @@
 const db = require("../models");
-const User = db.tests;
+const User = db.users;
 
 // Create and Save a new User
 exports.create = (req, res) => {
   // Validate request
-  if (!req.body.title) {
+  if (!req.body.email) {
     res.status(400).send({ message: "Content can not be empty!" });
     return;
   }
 
   // Create a User
   const user = new User({
-    title: req.body.title,
-    description: req.body.description,
-    published: req.body.published ? req.body.published : false
+    email: req.body.email,
+    name: req.body.name,
+    active: req.body.active ? req.body.active : false
   });
 
   // Save User in the database
@@ -32,8 +32,8 @@ exports.create = (req, res) => {
 
 // Retrieve all Users from the database.
 exports.findAll = (req, res) => {
-  const title = req.query.title;
-  var condition = title ? { title: { $regex: new RegExp(title), $options: "i" } } : {};
+  const email = req.query.email;
+  var condition = email ? { email: { $regex: new RegExp(email), $options: "i" } } : {};
 
   User.find(condition)
     .then(data => {
@@ -128,9 +128,9 @@ exports.deleteAll = (req, res) => {
     });
 };
 
-// Find all published Users
+// Find all active Users
 exports.findAllPublished = (req, res) => {
-  User.find({ published: true })
+  User.find({ active: true })
     .then(data => {
       res.send(data);
     })
