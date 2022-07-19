@@ -3,7 +3,24 @@ module.exports = mongoose => {
     {
       title: String,
       description: String,
-      published: Boolean
+      published: Boolean,
+      crono: Number,
+      questions: [{
+        question: String,
+        answers: [{
+          answer: String,
+          correct: Boolean
+        }]
+      }],
+      keys: [String],
+      attemps: Number,
+      vote_ok: Number,
+      vote_ko: Number,
+      author: {
+          email: String,
+          name: String,
+          surname: String
+      }
     },
     { timestamps: true }
   );
