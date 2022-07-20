@@ -40,7 +40,20 @@ exports.create = (req, res) => {
 // Retrieve all Tutorials from the database.
 exports.findAll = (req, res) => {
   const title = req.query.title;
-  var condition = title ? { title: { $regex: new RegExp(title), $options: "i" } } : {};
+  const key = req.query.key;
+  const author = req.query.author;
+
+  var condition = {};
+  if(title){
+    console.log("Título:" +title);
+    condition = { title: { $regex: new RegExp(title), $options: "i" } };
+  } else if(key){
+    console.log("Tag:" +key);
+    condition = { "keys": {$in: [key]} };
+  } else if(author) {
+    console.log("Author:" + author);
+    condition = { author: { email: { $regex: new RegExp(author), $options: "i" } }};
+  }
 
   Tutorial.find(condition)
     .then(data => {
