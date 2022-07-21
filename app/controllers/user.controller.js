@@ -13,7 +13,12 @@ exports.create = (req, res) => {
   const user = new User({
     email: req.body.email,
     name: req.body.name,
-    active: req.body.active ? req.body.active : false
+    active: req.body.active ? req.body.active : false,
+    password: req.body.password,
+    company: req.body.company,
+    tests: req.body.tests,
+    roles: req.body.roles
+
   });
 
   // Save User in the database
@@ -33,7 +38,20 @@ exports.create = (req, res) => {
 // Retrieve all Users from the database.
 exports.findAll = (req, res) => {
   const email = req.query.email;
-  var condition = email ? { email: { $regex: new RegExp(email), $options: "i" } } : {};
+  const company_name = req.query.company_name;
+  const rol = req.query.rol;
+
+  let condition = {};
+  if(email){
+    console.log("Email:" +email);
+    condition = { email: { $regex: new RegExp(email), $options: "i" } };
+  } else if(rol){
+    console.log("Rol:" +rol);
+    condition = { "roles": {$in: [rol]} };
+  } else if(company_name) {
+    console.log("Company Name:" + company_name);
+    condition = { company: { name: { $regex: new RegExp(company_name), $options: "i" } }};
+  }
 
   User.find(condition)
     .then(data => {

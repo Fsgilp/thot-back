@@ -9,7 +9,8 @@ module.exports = mongoose => {
       tests: [{title: String, qualification: Number, 
         attemps: {count:Number, attemp: [{test_date: Date, qualification: Number}]}, 
         pass: Boolean, certificate: Boolean, last_date: Date}],
-      active: Boolean
+      active: Boolean,
+      roles: [String]
     },
     { timestamps: true }
   );
