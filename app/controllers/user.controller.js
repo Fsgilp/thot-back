@@ -13,6 +13,7 @@ exports.create = (req, res) => {
   const user = new User({
     email: req.body.email,
     name: req.body.name,
+    surname: req.body.surname,
     active: req.body.active ? req.body.active : false,
     password: req.body.password,
     company: req.body.company,
@@ -50,7 +51,7 @@ exports.findAll = (req, res) => {
     condition = { "roles": {$in: [rol]} };
   } else if(company_name) {
     console.log("Company Name:" + company_name);
-    condition = { company: { name: { $regex: new RegExp(company_name), $options: "i" } }};
+    condition = { "company.name": { $regex: new RegExp(company_name), $options: "i" } };
   }
 
   User.find(condition)

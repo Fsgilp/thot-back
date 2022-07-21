@@ -52,7 +52,7 @@ exports.findAll = (req, res) => {
     condition = { "keys": {$in: [key]} };
   } else if(author) {
     console.log("Author:" + author);
-    condition = { author: { email: { $regex: new RegExp(author), $options: "i" } }};
+    condition = { "author.email": { $regex: new RegExp(author), $options: "i" } };
   }
 
   Tutorial.find(condition)
