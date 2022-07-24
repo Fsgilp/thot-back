@@ -3,6 +3,8 @@ const Tutorial = db.tests;
 
 // Create and Save a new Tutorial
 exports.create = (req, res) => {
+
+  console.log(req.body);
   // Validate request
   if (!req.body.title) {
     res.status(400).send({ message: "Content can not be empty!" });
@@ -74,13 +76,13 @@ exports.findOne = (req, res) => {
   Tutorial.findById(id)
     .then(data => {
       if (!data)
-        res.status(404).send({ message: "Not found Tutorial with id " + id });
+        res.status(404).send({ message: "Not found Tutorial"});
       else res.send(data);
     })
     .catch(err => {
       res
         .status(500)
-        .send({ message: "Error retrieving Tutorial with id=" + id });
+        .send({ message: "Error retrieving Tutorial"});
     });
 };
 
@@ -98,13 +100,13 @@ exports.update = (req, res) => {
     .then(data => {
       if (!data) {
         res.status(404).send({
-          message: `Cannot update Tutorial with id=${id}. Maybe Tutorial was not found!`
+          message: `Cannot update Tutorial. Maybe Tutorial was not found!`
         });
       } else res.send({ message: "Tutorial was updated successfully." });
     })
     .catch(err => {
       res.status(500).send({
-        message: "Error updating Tutorial with id=" + id
+        message: "Error updating Tutorial"
       });
     });
 };
@@ -117,7 +119,7 @@ exports.delete = (req, res) => {
     .then(data => {
       if (!data) {
         res.status(404).send({
-          message: `Cannot delete Tutorial with id=${id}. Maybe Tutorial was not found!`
+          message: `Cannot delete Tutorial. Maybe Tutorial was not found!`
         });
       } else {
         res.send({
@@ -127,7 +129,7 @@ exports.delete = (req, res) => {
     })
     .catch(err => {
       res.status(500).send({
-        message: "Could not delete Tutorial with id=" + id
+        message: "Could not delete Tutorial"
       });
     });
 };
@@ -137,7 +139,7 @@ exports.deleteAll = (req, res) => {
   Tutorial.deleteMany({})
     .then(data => {
       res.send({
-        message: `${data.deletedCount} Tutorials were deleted successfully!`
+        message: `Tutorials were deleted successfully!`
       });
     })
     .catch(err => {
