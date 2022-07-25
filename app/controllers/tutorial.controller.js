@@ -22,6 +22,7 @@ exports.create = (req, res) => {
     attemps: req.body.attemps,
     vote_ok: req.body.vote_ok,
     vote_ko: req.body.vote_ko,
+    language: req.body.language,
     author: req.body.author
   });
 

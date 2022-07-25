@@ -16,6 +16,7 @@ module.exports = mongoose => {
       attemps: Number,
       vote_ok: Number,
       vote_ko: Number,
+      language: String,
       author: {
           email: String,
           name: String,
