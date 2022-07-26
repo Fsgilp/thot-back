@@ -23,6 +23,7 @@ exports.create = (req, res) => {
     vote_ok: req.body.vote_ok,
     vote_ko: req.body.vote_ko,
     language: req.body.language,
+    correccionAutomatica: req.body.correccionAutomatica,
     author: req.body.author
   });
 

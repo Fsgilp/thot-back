@@ -17,6 +17,7 @@ module.exports = mongoose => {
       vote_ok: Number,
       vote_ko: Number,
       language: String,
+      correccionAutomatica: Boolean,
       author: {
           email: String,
           name: String,
