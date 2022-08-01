@@ -4,6 +4,15 @@ module.exports = app => {
 
   var router = require("express").Router();
 
+  // Login
+  router.post("/auth/signin", users.signin);
+
+  // Register - No se utiliza, es directamente creación usuario
+  // router.post("/auth/signup", users.create);
+
+  // Logout - No hace falta registrar por el momento el logout
+  // router.post("/auth/signout", users.create);
+
   // Creates
   router.post("/tutorials/", tutorials.create);
   router.post("/users/", users.create);
@@ -15,6 +24,7 @@ module.exports = app => {
   // Retrieve all published 
   router.get("/tutorials/published", tutorials.findAllPublished);
   router.get("/users/published", users.findAllPublished);
+  router.get("/users/company", users.findAllCompany);
 
   // Retrieve a single Tutorial with id
   router.get("/tutorials/:id", tutorials.findOne);

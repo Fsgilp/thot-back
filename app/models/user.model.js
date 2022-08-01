@@ -10,6 +10,7 @@ module.exports = mongoose => {
         attemps: {count:Number, attemp: [{test_date: Date, qualification: Number}]}, 
         pass: Boolean, certificate: Boolean, last_date: Date}],
       active: Boolean,
+      isCompany: Boolean,
       roles: [String]
     },
     { timestamps: true }

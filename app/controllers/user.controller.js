@@ -2,6 +2,25 @@ const db = require("../models");
 const User = db.users;
 
 // Create and Save a new User
+exports.signin = (req, res) => {
+  // Validate request
+  if (!req.body.email || !req.body.password) {
+    res.status(400).send({ message: "Content can not be empty!" });
+    return;
+  }
+  User.find({ email: req.body.email, password: req.body.password})
+  .then(data => {
+    res.send(data);
+  })
+  .catch(err => {
+    res.status(500).send({
+      message:
+        err.message || "Some error occurred while retrieving users."
+    });
+  });
+};
+
+// Create and Save a new User
 exports.create = (req, res) => {
   // Validate request
   if (!req.body.email) {
@@ -15,6 +34,7 @@ exports.create = (req, res) => {
     name: req.body.name,
     surname: req.body.surname,
     active: req.body.active ? req.body.active : false,
+    isCompany: req.body.isCompany ? req.body.isCompany : false,
     password: req.body.password,
     company: req.body.company,
     tests: req.body.tests,
@@ -150,6 +170,21 @@ exports.deleteAll = (req, res) => {
 // Find all active Users
 exports.findAllPublished = (req, res) => {
   User.find({ active: true })
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving users."
+      });
+    });
+};
+
+exports.findAllCompany = (req, res) => {
+  const cif = req.query.cif;
+  let condition = { "company.cif": { $regex: new RegExp(cif), $options: "i" }, isCompany: true  };
+  User.find(condition)
     .then(data => {
       res.send(data);
     })
