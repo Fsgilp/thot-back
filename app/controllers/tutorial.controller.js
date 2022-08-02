@@ -24,7 +24,8 @@ exports.create = (req, res) => {
     vote_ko: req.body.vote_ko,
     language: req.body.language,
     correccionAutomatica: req.body.correccionAutomatica,
-    author: req.body.author
+    author: req.body.author,
+    passed: req.body.passed
   });
 
   // Save Tutorial in the database

@@ -22,7 +22,8 @@ module.exports = mongoose => {
           email: String,
           name: String,
           surname: String
-      }
+      },
+      passed: Number
     },
     { timestamps: true }
   );

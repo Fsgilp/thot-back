@@ -8,7 +8,7 @@ exports.signin = (req, res) => {
     res.status(400).send({ message: "Content can not be empty!" });
     return;
   }
-  User.find({ email: req.body.email, password: req.body.password})
+  User.find({ email: req.body.email, password: req.body.password, active: true})
   .then(data => {
     res.send(data);
   })
