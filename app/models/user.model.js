@@ -6,9 +6,7 @@ module.exports = mongoose => {
       surname: String,
       password:  String,
       company: {cif: String, name:String, active: Boolean},
-      tests: [{title: String, qualification: Number, 
-        attemps: {count:Number, attemp: [{test_date: Date, qualification: Number}]}, 
-        pass: Boolean, certificate: Boolean, last_date: Date}],
+      tests: [{title: String, attemps: Number, pass: Boolean, language:String, last_date: Date}],
       active: Boolean,
       isCompany: Boolean,
       roles: [String]

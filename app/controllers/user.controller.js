@@ -111,6 +111,9 @@ exports.update = (req, res) => {
     });
   }
 
+  console.log(req.body);
+  console.log(req.params.id);
+
   const id = req.params.id;
 
   User.findByIdAndUpdate(id, req.body, { useFindAndModify: false })

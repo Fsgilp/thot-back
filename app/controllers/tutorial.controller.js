@@ -4,7 +4,6 @@ const Tutorial = db.tests;
 // Create and Save a new Tutorial
 exports.create = (req, res) => {
 
-  console.log(req.body);
   // Validate request
   if (!req.body.title) {
     res.status(400).send({ message: "Content can not be empty!" });
@@ -83,9 +82,7 @@ exports.findOne = (req, res) => {
       else res.send(data);
     })
     .catch(err => {
-      res
-        .status(500)
-        .send({ message: "Error retrieving Tutorial"});
+      res.status(500).send({ message: "Error retrieving Tutorial"});
     });
 };
 
@@ -158,6 +155,28 @@ exports.findAllPublished = (req, res) => {
   Tutorial.find({ published: true })
     .then(data => {
       res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving tutorials."
+      });
+    });
+};
+
+// Find all published Tutorials
+exports.getByTitle = (req, res) => {
+  let title = req.query.title;
+  title = decodeURIComponent(title);
+
+  console.log("RECIBIDO: " +title);
+  Tutorial.find({ title: title })
+    .then(data => {
+      if(data.length>0){
+        res.send(true);
+      }else{
+        res.send(false);
+      }
     })
     .catch(err => {
       res.status(500).send({

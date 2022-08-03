@@ -27,6 +27,7 @@ module.exports = app => {
   router.get("/users/company", users.findAllCompany);
 
   // Retrieve a single Tutorial with id
+  router.get("/tutorials/find/title", tutorials.getByTitle);
   router.get("/tutorials/:id", tutorials.findOne);
   router.get("/users/:id", users.findOne);
 
