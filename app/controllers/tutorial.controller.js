@@ -173,9 +173,9 @@ exports.getByTitle = (req, res) => {
   Tutorial.find({ title: title })
     .then(data => {
       if(data.length>0){
-        res.send(true);
+        res.send({existe:true, id: data[0].id});
       }else{
-        res.send(false);
+        res.send({existe:false, id: null});
       }
     })
     .catch(err => {
