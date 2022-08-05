@@ -23,7 +23,9 @@ module.exports = mongoose => {
           name: String,
           surname: String
       },
-      passed: Number
+      passed: Number,
+      positive: Number,
+      negative: Number
     },
     { timestamps: true }
   );

@@ -24,7 +24,9 @@ exports.create = (req, res) => {
     language: req.body.language,
     correccionAutomatica: req.body.correccionAutomatica,
     author: req.body.author,
-    passed: req.body.passed
+    passed: req.body.passed,
+    positive: req.body.positive,
+    negative: req.body.negative
   });
 
   // Save Tutorial in the database
