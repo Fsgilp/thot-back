@@ -25,8 +25,8 @@ exports.create = (req, res) => {
     correccionAutomatica: req.body.correccionAutomatica,
     author: req.body.author,
     passed: req.body.passed,
-    positive: req.body.positive,
-    negative: req.body.negative
+    rating: req.body.rating,
+    num_votes: req.body.num_votes
   });
 
   // Save Tutorial in the database
@@ -51,13 +51,10 @@ exports.findAll = (req, res) => {
 
   var condition = {};
   if(title){
-    console.log("Título:" +title);
     condition = { title: { $regex: new RegExp(title), $options: "i" } };
   } else if(key){
-    console.log("Tag:" +key);
     condition = { "keys": {$in: [key]} };
   } else if(author) {
-    console.log("Author:" + author);
     condition = { "author.email": { $regex: new RegExp(author), $options: "i" } };
   }
 
@@ -171,7 +168,6 @@ exports.getByTitle = (req, res) => {
   let title = req.query.title;
   title = decodeURIComponent(title);
 
-  console.log("RECIBIDO: " +title);
   Tutorial.find({ title: title })
     .then(data => {
       if(data.length>0){

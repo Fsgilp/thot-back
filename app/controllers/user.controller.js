@@ -64,13 +64,10 @@ exports.findAll = (req, res) => {
 
   let condition = {};
   if(email){
-    console.log("Email:" +email);
     condition = { email: { $regex: new RegExp(email), $options: "i" } };
   } else if(rol){
-    console.log("Rol:" +rol);
     condition = { "roles": {$in: [rol]} };
   } else if(company_name) {
-    console.log("Company Name:" + company_name);
     condition = { "company.name": { $regex: new RegExp(company_name), $options: "i" } };
   }
 
@@ -110,10 +107,6 @@ exports.update = (req, res) => {
       message: "Data to update can not be empty!"
     });
   }
-
-  console.log(req.body);
-  console.log(req.params.id);
-
   const id = req.params.id;
 
   User.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
