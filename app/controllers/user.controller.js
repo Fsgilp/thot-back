@@ -191,3 +191,20 @@ exports.findAllCompany = (req, res) => {
       });
     });
 };
+
+exports.findByCompany = (req, res) => {
+  const cif = req.params.cif;
+
+  let condition = { "company.cif": { $regex: new RegExp(cif), $options: "i" }, isCompany: false  };
+  User.find(condition)
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving users."
+      });
+    });
+  
+};

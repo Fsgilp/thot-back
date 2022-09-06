@@ -21,25 +21,24 @@ module.exports = app => {
   router.get("/tutorials/", tutorials.findAll);
   router.get("/users/", users.findAll);
 
-  // Retrieve all published 
+  // Retrieve all
   router.get("/tutorials/published", tutorials.findAllPublished);
   router.get("/users/published", users.findAllPublished);
   router.get("/users/company", users.findAllCompany);
+  router.get("/users/bycompany/:cif", users.findByCompany);
 
   // Retrieve a single Tutorial with id
   router.get("/tutorials/find/title", tutorials.getByTitle);
   router.get("/tutorials/:id", tutorials.findOne);
   router.get("/users/:id", users.findOne);
 
-  // Update a Tutorial with id
+  // Updates
   router.put("/tutorials/:id", tutorials.update);
   router.put("/users/:id", users.update);
 
-  // Delete a Tutorial with id
+  // Deletes
   router.delete("/tutorials/:id", tutorials.delete);
   router.delete("/users/:id", users.delete);
-
-  // Create a new Tutorial
   router.delete("/tutorials/", tutorials.deleteAll);
   router.delete("/users/", users.deleteAll);
 
