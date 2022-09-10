@@ -9,6 +9,7 @@ module.exports = mongoose => {
       tests: [{title: String, attemps: Number, pass: Boolean, language:String, rating: Number, vote: Boolean, last_date: Date}],
       active: Boolean,
       isCompany: Boolean,
+      admin: Boolean,
       roles: [String]
     },
     { timestamps: true }

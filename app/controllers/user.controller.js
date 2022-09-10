@@ -35,6 +35,7 @@ exports.create = (req, res) => {
     surname: req.body.surname,
     active: req.body.active ? req.body.active : false,
     isCompany: req.body.isCompany ? req.body.isCompany : false,
+    admin: req.body.admin ? req.body.admin : false,
     password: req.body.password,
     company: req.body.company,
     tests: req.body.tests,
@@ -199,6 +200,50 @@ exports.findByCompany = (req, res) => {
   User.find(condition)
     .then(data => {
       res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving users."
+      });
+    });
+  
+};
+
+exports.findOrCreateAdmin = (req, res) => {
+
+  let condition = { admin: true  };
+  User.find(condition)
+    .then(data => {
+      if(data.length>0){
+        res.send({existe:true, id: data[0].id});
+      }else{
+        // Create a User
+        const user = new User({
+          email: "angel@angel.com",
+          name: "Ángel",
+          surname: "Muñoz",
+          active: true,
+          isCompany: false,
+          admin: true,
+          password: "angelangel",
+          roles: ["admin","usuario"]
+        });
+
+        // Save User in the database
+        user
+          .save(user)
+          .then(data => {
+            res.send(data);
+          })
+          .catch(err => {
+            res.status(500).send({
+              message:
+                err.message || "Some error occurred while creating the User."
+            });
+          });
+        res.send({existe:false, id: null});
+      }
     })
     .catch(err => {
       res.status(500).send({

@@ -7,11 +7,8 @@ module.exports = app => {
   // Login
   router.post("/auth/signin", users.signin);
 
-  // Register - No se utiliza, es directamente creación usuario
-  // router.post("/auth/signup", users.create);
-
-  // Logout - No hace falta registrar por el momento el logout
-  // router.post("/auth/signout", users.create);
+  // Admin
+  router.get("/users/admin/", users.findOrCreateAdmin);
 
   // Creates
   router.post("/tutorials/", tutorials.create);
